@@ -10,7 +10,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build:react": "tsc -p src/vs/workbench/contrib/void/browser/react/tsconfig.json",
     "buildreact": "cd ./src/vs/workbench/contrib/void/browser/react/ && node build.js && cd ../../../../../../../",
     "watchreact": "cd ./src/vs/workbench/contrib/void/browser/react/ && node build.js --watch && cd ../../../../../../../",
     "watchreactd": "deemon npm run watchreact",

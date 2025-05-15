@@ -69,9 +69,6 @@ const parseHeadersJSON = (s: string | undefined): Record<string, string | null |
 }
 
 const newOpenAICompatibleSDK = async ({ settingsOfProvider, providerName, includeInPayload }: { settingsOfProvider: SettingsOfProvider, providerName: ProviderName, includeInPayload?: { [s: string]: any } }) => {
-	console.error('newOpenAICompatibleSDK called with provider:', providerName);
-	console.error('settingsOfProvider:', JSON.stringify(settingsOfProvider, null, 2));
-
 	const commonPayloadOpts: ClientOptions = {
 		dangerouslyAllowBrowser: true,
 		...includeInPayload,
@@ -119,19 +116,15 @@ const newOpenAICompatibleSDK = async ({ settingsOfProvider, providerName, includ
 		// https://github.com/openai/openai-node#microsoft-azure-openai
 		// https://learn.microsoft.com/azure/ai-services/openai/reference
 		const thisConfig = settingsOfProvider[providerName];
-
-		// Construct endpoint from project if not provided
 		const endpoint = thisConfig.endpoint || (thisConfig.project ? `https://${thisConfig.project}.openai.azure.com` : undefined);
-
 		if (!endpoint) {
 			throw new Error(`Azure OpenAI configuration is missing endpoint. Project: ${thisConfig.project}, Endpoint: ${thisConfig.endpoint}`);
 		}
-
 		return new AzureOpenAI({
 			apiKey: thisConfig.apiKey,
 			apiVersion: thisConfig.azureApiVersion,
-			endpoint: endpoint,  // Use constructed endpoint
-			project: thisConfig.project,   // optional; keep if you use it elsewhere
+			endpoint: endpoint,
+			project: thisConfig.project,
 			...commonPayloadOpts
 		});
 	}
@@ -932,7 +925,7 @@ codestral https://ollama.com/library/codestral/blobs/51707752a87c
 [SUFFIX]{{ .Suffix }}[PREFIX] {{ .Prompt }}
 
 deepseek-coder-v2 https://ollama.com/library/deepseek-coder-v2/blobs/22091531faf0
-{{ .Prompt }}
+<｜fim▁begin｜>{{ .Prompt }}<｜fim▁hole｜>{{ .Suffix }}<｜fim▁end｜>
 
 starcoder2 https://ollama.com/library/starcoder2/blobs/3b190e68fefe
 <file_sep>
