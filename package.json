@@ -10,6 +10,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "build:react": "tsc -p src/vs/workbench/contrib/void/browser/react/tsconfig.json",
     "buildreact": "cd ./src/vs/workbench/contrib/void/browser/react/ && node build.js && cd ../../../../../../../",
     "watchreact": "cd ./src/vs/workbench/contrib/void/browser/react/ && node build.js --watch && cd ../../../../../../../",
     "watchreactd": "deemon npm run watchreact",
@@ -223,6 +224,7 @@
     "mocha-junit-reporter": "^2.2.1",
     "mocha-multi-reporters": "^1.5.1",
     "next": "^15.3.1",
+    "node-addon-api": "^8.3.1",
     "nodemon": "^3.1.10",
     "npm-run-all": "^4.1.5",
     "original-fs": "^1.2.0",
